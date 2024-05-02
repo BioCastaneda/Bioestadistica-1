@@ -119,9 +119,9 @@ plot6
 ggarrange(plot5, plot6, labels=c("A","B"), ncol=2, nrow=1)
 ```
 
-Independiente si analizamos los datos originles o transformados (log10), podemos concluir que hay diferencias significativas en el tiempo de respuesta de los antibióticos. Sin emabrgo, no podemos saber (aún) si todos los antibióticos tienen una respuesta distinta entre ellos o solo algunos de ellos difieren.
+Independiente si analizamos los datos originles o transformados (log10), podemos concluir que hay diferencias significativas en el tiempo de respuesta de los antibióticos. Sin embargo, no podemos saber (aún) si todos los antibióticos tienen una respuesta distinta entre ellos o solo algunos de ellos difieren.
 
-**4. Comparaciones múltiple**
+**4. Comparaciones múltiples**
 
 Para esto, vamos a realizar dos pruebas a posterior: una comparación múltiple a través de la prueba de significancia honesta de Tukey (Tukey HSD), y varias pruebas pareadas corregidas por Bonferroni
 ```
@@ -199,7 +199,7 @@ anova(test1)
 ## Calcular el poder estadístico del diseño (probabilidad de aceptar H1 cuando es veradadera)
 power.anova.test(groups=3,  n=9, between.var= 1204, within.var=268, sig.level=0.05)
 #
-## Calcular el número mñinimo de replicar para lograr un poder de 1
+## Calcular el número mínimo de replicar para lograr un poder de 1
 power.anova.test(groups=3, power=0.999, between.var=1204, within.var=268.4, sig.level=0.05)
 ```
 
@@ -272,14 +272,9 @@ Claramente los datos no se adjustan a una distribución normal por lo que debemo
 ```
 kt <- kruskal.test(score~year, data=data2a)
 ```
-Vamos a agregar una función con la cual si la prueba de Kruskal-Walis resulta significativa (p<0.05), automáticamente se prodecerá a realizar una prueba por parejas corregida por el método de la tasa de descubrimiento falsa (FDR)
+Vamos a realizar una prueba por parejas corregida por el método de la tasa de descubrimiento falso-positivo (FDR) como análisis a posteriori.
 ```
-if(kt$p.value < 0.05){
-  pt.fdr <- pairwise.wilcox.test(data2a$score, g=data2a$year,
-                             p.adjust.method="fdr")
-}
-kt
-pt.fdr
+pairwise.wilcox.test(data2a$score, g=data2a$year, p.adjust.method="fdr")
 ```
 
 Dado que los datos no son normales, la mejor opción de graficarlos es con un gráfico de caja-bigote.
