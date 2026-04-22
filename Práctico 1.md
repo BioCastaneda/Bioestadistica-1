@@ -219,10 +219,25 @@ oddsratio(data4, rev="c")  # Dado que nuestra matriz contiene en la columna 1 lo
                            # por defecto comparará la la columna 2 versus la columna 1. Pero como queremos comparar casos versus controles,
                            # debemos incluir el argumento *rev="c"* que permitirá invertir las columnas.
 #
-# Otra opción es desde un principio crear una matriz con los controles en la columna 1 y los casos en la columna 2
-data5 <- matrix(c(127,35,41,52),2,2, byrow=T)
-coln <- c("Controles","Casos")
-dimnames(data5) <- list("Condición"=rown, "Control-caso"=coln) 
-oddsratio(data5)
 ```
+### Ejemplo 2
 
+Analicemos los datos proporcionados en el artículo de Szumilas (2010).
+
+```
+## Crear nombres para las columnas y filas
+coln <- c("Conducta suicida + ","Conducta suicida -")
+rown <- c("Depresión +","Depresión -")
+#
+## Ingresar valores de frecuencias desde la tabla 1
+data5 <- matrix(c(45,86,32,100),2,2, byrow=T)
+#
+## Agregar nombres de columnas y filas a la matriz
+dimnames(data5) <- list("Condición"=rown, "Caso-control"=coln)
+#
+## Realizar el análisis de odds ratio
+oddsratio(data5) 
+#
+## Realizar el análisis de odds ratio
+oddsratio(data5, rev="both") 
+```
