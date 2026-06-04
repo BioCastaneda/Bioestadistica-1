@@ -19,24 +19,24 @@ Este set datos incluye diversas variabiles físico-químicas asociadas a muestra
 ## Cargar los siguientes paquetes
 library(ggpubr)
 library(rstatix)
+library(readxl)
 
 ## cargar los datos
-data1 <- read.table("Suelos.txt", header=T)
+data1 <- read_xlsx("dataR2.xlsx")
 head(data1)
 str(data1)
 data1$site <- as.factor(data1$site)
+```
 
-## Estimar las correlaciones entre todas las variables físico-químicas.
+
+Estimar las correlaciones entre todas las variables físico-químicas
+```
 cor(data1)
 head(data1)
+```
 
-## Una matriz de correlaciones solo puede obtenerse a partir de variables númericas.
-## Por lo tanto debemos excluir las variables agrupadoras
-data2 <- data1[,-c(1,2)]
-cor(data2)
-round(cor(data2),2) # coeficientes de correlación con dos cifras significativas
-
-## Ahora hagamos lo mismo, pero con el paquete rstatix
+Ahora hagamos lo mismo, pero con el paquete rstatix
+```
 cor.mat <- data2 %>% cor_mat()
 cor.mat
 #
