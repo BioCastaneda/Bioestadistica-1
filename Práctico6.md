@@ -14,7 +14,7 @@ En este realizaremos diversos análisis multivariados en R. Primero realizaremos
 
 Descargar los datos contenidos en el archivo de texto [Suelos](https://github.com/lecastaneda/Bioestadistica/blob/main/Suelos.txt)
 
-Este set datos incluye diversas variabiles físico-químicas asociadas a muestras de suelos provenientes de 5 bosques de raulíes en la Región de Los Ríos.
+
 ```
 ## Cargar los siguientes paquetes
 library(ggpubr)
